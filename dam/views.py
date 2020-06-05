@@ -17,17 +17,7 @@ def index(request):
         image = Image.open(myfile)
         thumb_image = image.resize(size,Image.ANTIALIAS)
         thumb_image.save(thumb_name, quality=100)
-        try:
-            img_arry = img_to_array(thumb_image)
-            to_pred = np.expand_dims(img_arry, axis=0)
-            prep = preprocess_input(to_pred)
-            model = InceptionResNetV2(weights='imagenet')
-            prediction = model.predict(prep)
-            decoded = decode_predictions(prediction)[0][0][1]
-            tag = str(decoded)
-            new_image = UserImage.objects.create(filename=myfile,image_upload=myfile,thumb_image_upload=thumb_name, image_thumbnail=thumb_name, folder=tag)
-        except:
-            new_image = UserImage.objects.create(filename=myfile,image_upload=myfile,thumb_image_upload=thumb_name, image_thumbnail=thumb_name)
+        new_image = UserImage.objects.create(filename=myfile,image_upload=myfile,thumb_image_upload=thumb_name, image_thumbnail=thumb_name)
     return render(request, 'dam/index.html',{'image_objects':image_objects})
 
 
