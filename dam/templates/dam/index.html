@@ -21,15 +21,19 @@
             <img class="image" id="{{ image.filename }}" src="{% static 'dam/images/' %}{{ image.filename }}">
             </a>
             <a class="filename">
-                {{ image.filename }}
+                {{ image.filename }} <br>
+                {{ image.folder }}
             </a>
         </div>
         {% endfor %}   
     </div>
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p }} 
-        <button type="submit">Upload</button> 
+        <label for="img">Select image:</label>
+        <p>
+        <input type="file" id="img" name="img" accept="image/*">
+        </p>
+        <button name="myfile" type="submit">Upload</button> 
       </form>
 </body>
 <script src="{% static 'dam/app.js' %}"></script>

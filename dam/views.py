@@ -1,16 +1,33 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
-from .models import Image
-from django.core.files.uploadedfile import InMemoryUploadedFile, TemporaryUploadedFile
+from .models import UserImage
+from keras.preprocessing.image import load_img, img_to_array
+import numpy as np
+from tensorflow.keras.applications.inception_resnet_v2 import InceptionResNetV2, decode_predictions, preprocess_input
+from PIL import Image
 from .forms import *
 
 # Create your views here.
 def index(request):
-    image_objects = Image.objects.all()
-    form = ImageForm(request.POST,request.FILES) 
-    if request.method == 'POST': 
-            if form.is_valid(): 
-                Image.objects.create(filename=form.cleaned_data)
-                form.save() 
-    return render(request, 'dam/index.html',{'image_objects':image_objects, 'form':form})
+    image_objects = UserImage.objects.all()
+    if request.method == 'POST' and request.FILES['img']:
+        myfile = request.FILES['img'] 
+        size = (299, 299)
+        image_upload = ImageForm(request.POST.get('img'),request.FILES.get('img'))
+        thumb_name = 'dam/static/dam/images/thumb-'+str(myfile)
+        image = Image.open(myfile)
+        thumb_image = image.resize(size,Image.ANTIALIAS)
+        thumb_image.save(thumb_name, quality=100)
+        try:
+            img_arry = img_to_array(thumb_image)
+            to_pred = np.expand_dims(img_arry, axis=0)
+            prep = preprocess_input(to_pred)
+            model = InceptionResNetV2(weights='imagenet')
+            prediction = model.predict(prep)
+            decoded = decode_predictions(prediction)[0][0][1]
+            tag = str(decoded)
+            new_image = UserImage.objects.create(filename=myfile,image_upload=myfile,thumb_image_upload=thumb_name, image_thumbnail=thumb_name, folder=tag)
+        except:
+            new_image = UserImage.objects.create(filename=myfile,image_upload=myfile,thumb_image_upload=thumb_name, image_thumbnail=thumb_name)
+    return render(request, 'dam/index.html',{'image_objects':image_objects})
 
 

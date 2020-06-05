@@ -4,5 +4,5 @@ from .models import *
 
 class ImageForm(forms.ModelForm):
     class Meta:
-        model = Image
-        fields = ['image_upload']
+        model = UserImage
+        fields = ['image_upload', 'thumb_image_upload']
