@@ -1,0 +1,103 @@
+body {
+    background: rgb(255,255,255);
+    background: linear-gradient(61deg, rgba(255,255,255,1) 0%, rgba(235,235,235,1) 100%);
+    display:flex;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    overflow-x: hidden;
+}
+
+.mainimagecontainer{
+    position: fixed;
+    display: block;
+    width:100vw;
+    height:70vh;
+    top:10vh;
+    left:0vw;
+}
+
+.mainimage {
+    padding-left: 20%;
+    height: 100%;
+}
+
+.scroll-wrapper {
+    width: 100vw;
+    height: 20vh;
+    top:80vh;
+    left:0vw;
+    position: absolute;
+}
+.image-scroll{
+    height: 100%;
+    white-space: nowrap;
+    overflow:scroll;
+    overflow-y: hidden;
+    padding-left: 1%;
+    background-color: darkgrey;
+}
+
+.product-card {
+    height:95%;
+    padding-right: .5%;
+    padding-top:.5%;
+    display:inline-block;
+}
+
+.image {
+    height:98%;
+    border-radius:3%;
+}
+
+.search-bar{
+    z-index: 500;
+    position: fixed;
+    border:2px solid #454545;
+    display:flex;
+    top:22px;
+    width:100px;
+    height: 25px;
+    outline:none;
+    border-radius: 50px;
+    padding:2px;
+    transition:width 300ms ease-in-out;
+    left: 50%;
+    margin-left: 20px;
+}
+
+.search-bar__input{
+    flex-grow:1;
+    position: absolute;
+    color:#454545;
+    background:transparent;
+    border:none;
+    padding-left:20px;
+    top:0;
+    bottom:0;
+    left:0;
+    line-height: 22px;
+} 
+.search-bar__input:focus{
+    outline:none;
+} 
+
+.search__submit{
+    height:28px;
+    width:28px;
+    pointer-events: all;
+    border:none;
+    cursor:pointer;
+    border-radius: 50%;
+    background: none;
+    margin-left: auto;
+    padding:1px;
+}
+
+.search__submit.icon{
+    height:20px;
+    width:20px;
+}
+
+.search-bar:focus-within{
+    width:210px;
+}
+

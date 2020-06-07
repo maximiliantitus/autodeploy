@@ -1,6 +1,6 @@
 body {
-    background: rgb(255,255,255);
-    background: linear-gradient(61deg, rgba(255,255,255,1) 0%, rgba(235,235,235,1) 100%);
+    background: rgb(167,167,167);
+    background: linear-gradient(319deg, rgba(167,167,167,1) 0%, rgba(159,159,159,1) 100%);
     display:flex;
     font-family: 'Yanone Kaffeesatz', sans-serif;
     overflow-x: hidden;
@@ -9,7 +9,7 @@ body {
 .container{
     position: absolute;
     display:grid;
-    grid-template-columns: 33% 33% 33%;
+    grid-template-columns: 25% 25% 25% 25%;
     width:95%;
     left:2.5%;
     top:10%;
@@ -21,6 +21,7 @@ body {
     background:white;
     padding-bottom:15%;
     margin-right:2%;
+    margin:1%;
 }
 
 .container .image {
@@ -53,7 +54,7 @@ body {
     border-radius: 50px;
     padding:2px;
     transition:width 300ms ease-in-out;
-    left: 50%;
+    left: 75%;
     margin-left: 20px;
 }
 
@@ -94,3 +95,131 @@ body {
     width:210px;
 }
 
+
+.upload {
+    width:30%;
+    height:28px;
+    border:2px solid #ccc;
+    position: absolute;;
+    border-radius: 50px;
+    padding-left:5%;
+    padding-right:5%;
+    padding-top:2%;
+    padding-bottom:2%;
+    left:35%;
+    top:5px;
+}
+.upload-images{
+    left:30%;
+    width:100%;
+    padding-left:5%;
+    padding-right:5%;
+    padding-top:2%;
+    padding-bottom:2%;
+    height: 100%;
+    outline:none;
+    border:none;
+    border-radius: 50px;
+    background:none;
+    position: absolute;
+    top:14px;
+    font-size: 1.3em;
+    cursor:pointer;
+    z-index: 10;
+}
+
+
+.upload-icon {
+    height: 40px;
+    position: absolute;
+    top:10px;
+    left:15%;
+}
+
+.upload-button {
+    display:none;
+}
+
+.upload-images.active{
+    display:none;
+}
+
+
+
+.upload.active{
+    width:30%;
+    height: 25%;
+    border:2px dashed #ccc;
+    position: absolute;;
+    border-radius: 50px;
+    padding-left:5%;
+    padding-right:5%;
+    padding-top:2%;
+    padding-bottom:2%;
+    left:35%;
+    cursor:pointer;
+    animation: slide .2s forwards;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.upload-button.active {
+    border: 1px solid #ccc;
+    padding: 6px 12px;
+    display:block;
+    cursor: pointer;
+    border-radius: 20px;
+    top:65%;
+    left:40%;
+    position: absolute;
+}
+
+
+.upload-icon.active{
+    height: 100px;
+    position: absolute;
+    top:18%;
+    left:33%;
+}
+
+.container.active{
+    position: absolute;
+    display:grid;
+    grid-template-columns: 33% 33% 33%;
+    width:95%;
+    left:2.5%;
+    top:40%;
+}
+
+.upload-button:hover{
+    background:#454545;
+    color:white;
+    border:#454545;
+}
+
+
+@keyframes slide {
+	0% {
+        transform: scaleY(.3);
+        transform-origin: 50% 0%;
+	}
+
+	100% {
+        transform: scaleY(1);
+        transform-origin: 50% 0%;
+	}
+}
+
+@keyframes slideback {
+	0% {
+        transform: scaleY(1.5);
+        transform-origin: 50% 0%;
+	}
+
+	100% {
+        transform: scaleY(1);
+        transform-origin: 50% 0%;
+	}
+}

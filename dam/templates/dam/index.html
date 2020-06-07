@@ -17,7 +17,7 @@
     <div class="container">
         {% for image in image_objects %}
         <div class="product-card">
-            <a href='{% url "index" %}{{ product.id }}'>
+            <a href='{{ image.id }}'>
             <img class="image" id="{{ image.filename }}" src="{% static 'dam/images/' %}{{ image.filename }}">
             </a>
             <a class="filename">
@@ -27,13 +27,15 @@
         </div>
         {% endfor %}   
     </div>
-    <form method="POST" enctype="multipart/form-data">
+    <form class="upload" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        <label for="img">Select image:</label>
+        <img class='upload-icon' id='upload-icon' src="{% static 'dam/uploadicon.png' %}">
         <p>
-        <input type="file" id="img" name="img" accept="image/*">
+        <div class="upload-images">Upload Images</div>
+        <label for="img" class="upload-button"> Browse
+        </label>
+        <input type="file" id="img" name="img" accept="image/*" multiple>
         </p>
-        <button name="myfile" type="submit">Upload</button> 
       </form>
 </body>
 <script src="{% static 'dam/app.js' %}"></script>

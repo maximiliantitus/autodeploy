@@ -6,15 +6,22 @@ from .forms import *
 # Create your views here.
 def index(request):
     image_objects = UserImage.objects.all()
-    if request.method == 'POST' and request.FILES['img']:
-        myfile = request.FILES['img'] 
-        size = (299, 299)
-        image_upload = ImageForm(request.POST.get('img'),request.FILES.get('img'))
-        thumb_name = 'dam/static/dam/images/thumb-'+str(myfile)
-        image = Image.open(myfile)
-        thumb_image = image.resize(size,Image.ANTIALIAS)
-        thumb_image.save(thumb_name, quality=100)
-        new_image = UserImage.objects.create(filename=myfile,image_upload=myfile,thumb_image_upload=thumb_name, image_thumbnail=thumb_name)
+    files = request.FILES.getlist('img')
+    if request.method == 'POST' and request.FILES.getlist('img'):
+        for f in files: 
+            size = (299, 299)
+            image_upload = ImageForm(request.POST.getlist('img'),request.FILES.getlist('img'))
+            thumb_name = 'dam/static/dam/images/thumb-'+str(f)
+            image = Image.open(f)
+            thumb_image = image.resize(size,Image.ANTIALIAS)
+            thumb_image.save(thumb_name, quality=100)
+            new_image = UserImage.objects.create(filename=f,image_upload=f,thumb_image_upload=thumb_name, image_thumbnail=thumb_name)
     return render(request, 'dam/index.html',{'image_objects':image_objects})
+
+
+def detail(request,id):
+    image_objects = UserImage.objects.all()
+    image_object = UserImage.objects.get(id=id)
+    return render(request, 'dam/detail.html',{'image_objects':image_objects, 'image_object':image_object})
 
 
