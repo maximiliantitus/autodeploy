@@ -23,4 +23,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
     path('<int:id>/', views.detail, name='detail'),
+    path('deleteimage/<int:id>/', views.deleteimage, name='deleteimage'),
+    path(r'dam/static/dam/images/(?P<filename>)/$', views.downloadimage, name='downloadimage'),
 ]

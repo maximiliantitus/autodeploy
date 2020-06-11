@@ -10,3 +10,5 @@ var images = document.querySelectorAll('.image');
     mainImage.src = imageClicked;
 }
 
+var scrollWrapper = document.querySelector('.scroll-wrapper');
+

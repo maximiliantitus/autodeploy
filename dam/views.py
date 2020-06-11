@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
+from django.http import HttpResponse
+from wsgiref.util import FileWrapper
 from .models import UserImage
 from PIL import Image
 from .forms import *
@@ -25,3 +27,20 @@ def detail(request,id):
     return render(request, 'dam/detail.html',{'image_objects':image_objects, 'image_object':image_object})
 
 
+def deleteimage(request,id):
+    UserImage.objects.get(id=id).delete()
+    return redirect(index)
+
+
+def downloadimage(request, filename):
+    im = Image.open('dam/static/dam/images/'+ filename)
+    extension = filename.split(".")
+    response = HttpResponse(content_type='application/image')
+    response['Content-Disposition'] = 'attachment; filename=%s' % filename
+    try:
+        im.save(response,format='JPEG')
+    except:
+        im.save(response,format='PNG')
+    finally:
+        im.save(response,format='GIF')
+    return response

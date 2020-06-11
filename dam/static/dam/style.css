@@ -12,19 +12,24 @@ body {
     grid-template-columns: 25% 25% 25% 25%;
     width:95%;
     left:2.5%;
-    top:10%;
+    top:80px;
 }
 
 .product-card {
     border-radius:3%;
     font-family: 'Yanone Kaffeesatz', sans-serif;
     background:white;
-    padding-bottom:15%;
+    padding-bottom:10%;
     margin-right:2%;
     margin:1%;
 }
 
-.container .image {
+.product-description{
+    display:grid;
+    grid-template-columns: 80% 10% 10%;
+}
+
+.image {
     border-radius:3% 3% 0 0;
     top:0;
     width: 100%;
@@ -32,14 +37,35 @@ body {
     -webkit-box-shadow: 0px 0px 8px 0px rgba(50, 50, 50, 0.03);
     -moz-box-shadow:    0px 0px 8px 0px rgba(50, 50, 50, 0.03);
     box-shadow:         0px 0px 8px 0px rgba(50, 50, 50, 0.03);
-    padding-bottom: 1%;
+    padding-bottom: .5%;
+    background: rgb(167,167,167);
+    background: linear-gradient(319deg, rgba(167,167,167,1) 0%, rgba(159,159,159,1) 100%);
 }
 
-.container .filename {
-    width: 100%;
+.filename {
     font-weight: 600;
     font-size: 1.2em;
-    padding:25%;
+    padding-left:5%;
+    padding-top:2%;
+}
+
+.delete {
+    height:20px;
+    cursor: pointer;
+}
+
+.delete:hover{
+    animation: grow .2s forwards;
+}
+
+.download {
+    height:20px;
+    cursor: pointer;
+    padding-top:8%;
+}
+
+.download:hover{
+    animation: grow .2s forwards;
 }
 
 .search-bar{
@@ -96,23 +122,39 @@ body {
 }
 
 
-.upload {
+.uploader {
     width:30%;
     height:28px;
     border:2px solid #ccc;
     position: absolute;;
     border-radius: 50px;
-    padding-left:5%;
-    padding-right:5%;
-    padding-top:2%;
-    padding-bottom:2%;
-    left:35%;
+    padding-left:20px;
+    padding-right:20px;
+    padding-top:10px;
+    padding-bottom:28px;
+    left:33.2%;
     top:5px;
+    z-index: 100;
+    text-align: center;
+}
+
+.uploader.hovering {
+    width:30%;
+    height:28px;
+    border:2px solid black;
+    position: absolute;;
+    border-radius: 50px;
+    padding-left:20px;
+    padding-right:20px;
+    padding-top:10px;
+    padding-bottom:28px;
+    left:33.2%;
+    top:5px;
+    z-index: 100;
+    text-align: center;
 }
 .upload-images{
-    left:30%;
     width:100%;
-    padding-left:5%;
     padding-right:5%;
     padding-top:2%;
     padding-bottom:2%;
@@ -122,10 +164,11 @@ body {
     border-radius: 50px;
     background:none;
     position: absolute;
-    top:14px;
+    top:18px;
     font-size: 1.3em;
     cursor:pointer;
     z-index: 10;
+    color:#454545;
 }
 
 
@@ -146,25 +189,45 @@ body {
 
 
 
-.upload.active{
+.uploader.active{
     width:30%;
     height: 25%;
     border:2px dashed #ccc;
     position: absolute;;
     border-radius: 50px;
-    padding-left:5%;
-    padding-right:5%;
-    padding-top:2%;
-    padding-bottom:2%;
-    left:35%;
+    padding-left:20px;
+    padding-right:20px;
+    padding-top:10px;
+    padding-bottom:28px;
+    left:33.2%;
+    top:5px;
     cursor:pointer;
     animation: slide .2s forwards;
+    z-index: 100;
+    text-align: center;
+}
+
+.uploader.active.hovering{
+    width:30%;
+    height:25%;
+    border:2px dashed black;
+    position: absolute;;
+    border-radius: 50px;
+    padding-left:20px;
+    padding-right:20px;
+    padding-top:10px;
+    padding-bottom:28px;
+    left:33.2%;
+    top:5px;
+    cursor:pointer;
+    animation: slide .2s forwards;
+    z-index: 100;
+    text-align: center;
 }
 
 input[type="file"] {
     display: none;
 }
-
 .upload-button.active {
     border: 1px solid #ccc;
     padding: 6px 12px;
@@ -172,13 +235,13 @@ input[type="file"] {
     cursor: pointer;
     border-radius: 20px;
     top:65%;
-    left:40%;
+    left:42%;
     position: absolute;
 }
 
 
 .upload-icon.active{
-    height: 100px;
+    height: 90px;
     position: absolute;
     top:18%;
     left:33%;
@@ -221,5 +284,15 @@ input[type="file"] {
 	100% {
         transform: scaleY(1);
         transform-origin: 50% 0%;
+	}
+}
+
+@keyframes grow {
+	0% {
+		transform: scale(1);
+	}
+
+	100% {
+		transform: scale(1.2);
 	}
 }

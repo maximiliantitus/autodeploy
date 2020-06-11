@@ -20,23 +20,33 @@
             <a href='{{ image.id }}'>
             <img class="image" id="{{ image.filename }}" src="{% static 'dam/images/' %}{{ image.filename }}">
             </a>
-            <a class="filename">
-                {{ image.filename }} <br>
-                {{ image.folder }}
-            </a>
+            <div class="product-description">
+                <a class="filename">
+                    {{ image.filename }} <br>
+                    {{ image.folder }}
+                </a>
+                <a href='{% url "downloadimage" image.filename %}'>
+                    <img class='download' id='{{ image.filename }}' src="{% static 'dam/download.png' %}">
+                </a>
+                <a href='{% url "deleteimage" image.id %}'>
+                    <img class='delete' id='{{ image.filename }}' src="{% static 'dam/delete.png' %}">
+                </a>
+            </div>
         </div>
         {% endfor %}   
     </div>
-    <form class="upload" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <img class='upload-icon' id='upload-icon' src="{% static 'dam/uploadicon.png' %}">
-        <p>
-        <div class="upload-images">Upload Images</div>
-        <label for="img" class="upload-button"> Browse
-        </label>
-        <input type="file" id="img" name="img" accept="image/*" multiple>
-        </p>
-      </form>
+    <div class="uploader" id='uploader' >
+        <form class="upload" id='upload' method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <p>
+            <div class="upload-images">Upload Images</div>
+            <label for="img" class="upload-button"> Browse
+            </label>
+            <input type="file" id="img" name="img" accept="image/*" multiple>
+            <img class='upload-icon' id='upload-icon' src="{% static 'dam/uploadicon.png' %}">
+            </p>
+        </form>
+    </div>
 </body>
 <script src="{% static 'dam/app.js' %}"></script>
 </html>
